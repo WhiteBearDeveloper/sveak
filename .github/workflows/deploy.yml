@@ -27,14 +27,12 @@ jobs:
         with:
           node-version: 22
           cache: npm
-          cache-dependency-path: sveak/package-lock.json
+          cache-dependency-path: package-lock.json
 
       - name: Install dependencies
-        working-directory: sveak
         run: npm ci
 
       - name: Build project
-        working-directory: sveak
         run: npx gulp build
 
       - name: Setup Pages
@@ -43,7 +41,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4
         with:
-          path: sveak/dist
+          path: dist
 
   deploy:
     needs: build
