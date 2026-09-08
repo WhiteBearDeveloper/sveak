@@ -1,0 +1,45 @@
+@use "./../include/reset";
+@use "./../include/mixins";
+@use "./components/burger";
+@use "./components/menu";
+@use "./components/list-item";
+@use "./header";
+@use "./footer";
+
+:root {
+  --main-color: #adfcc8;
+
+  @include mixins.media-breakpoint-up(xs) {
+    --main-color: #95d9ff;
+  }
+  @include mixins.media-breakpoint-up(lg) {
+    --main-color: color-mix(in srgb, #d6bdff 40%, transparent);
+  }
+}
+
+.body {
+  font-family: "Roboto", sans-serif;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  min-height: 100vh;
+}
+.wrapper {
+  display: flex;
+  flex-grow: 1;
+  @include mixins.media-breakpoint-up(lg) {
+    align-items: stretch;
+  }
+}
+.content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+.icon {
+  fill: currentColor;
+}
+.bold {
+  font-weight: 700;
+}

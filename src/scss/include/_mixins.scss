@@ -1,0 +1,108 @@
+@use "sass:list";
+@use "./variables";
+
+@mixin transition($transitions...) {
+  $transition-result: ();
+  @each $transition-property in $transitions {
+    $transition-result: list.append(
+      $transition-result,
+      $transition-property variables.$transition-main,
+      comma
+    );
+  }
+  transition: $transition-result;
+}
+
+@mixin squareSize($size) {
+  width: $size;
+  height: $size;
+}
+
+@mixin media-breakpoint-down(
+  $breakpoint,
+  $breakpoints: variables.$media-sizes
+) {
+  @if index(map-keys($breakpoints), $breakpoint) {
+    $normalizedBreakpoint: map-get($breakpoints, $breakpoint);
+    @media (max-width: $normalizedBreakpoint - 1) {
+      @content;
+    }
+  } @else {
+    @error "Значение #{$breakpoint} должно находиться в массиве!";
+  }
+}
+
+@mixin media-breakpoint-up($breakpoint, $breakpoints: variables.$media-sizes) {
+  @if index(map-keys($breakpoints), $breakpoint) {
+    $normalizedBreakpoint: map-get($breakpoints, $breakpoint);
+    @media (min-width: $normalizedBreakpoint) {
+      @content;
+    }
+  } @else {
+    @error "Значение #{$breakpoint} должно находиться в массиве!";
+  }
+}
+
+@mixin media-breakpoint-between(
+  $breakpointStart,
+  $breakpointEnd,
+  $breakpoints: variables.$media-sizes
+) {
+  @if not(index(map-keys($breakpoints), $breakpointEnd)) {
+    @error "Значение #{$breakpointStart} должно находиться в массиве!";
+  } @else if not(index(map-keys($breakpoints), $breakpointEnd)) {
+    @error "Значение #{$breakpointEnd} должно находиться в массиве!";
+  } @else {
+    $normalizedBreakpointStart: map-get($breakpoints, $breakpointStart);
+    $normalizedBreakpointEnd: map-get($breakpoints, $breakpointEnd);
+
+    @if ($normalizedBreakpointStart >= $normalizedBreakpointEnd) {
+      @error "Стартовая точка ограничения должна быть меньше конечной!";
+    } @else {
+      @media (min-width: $normalizedBreakpointStart + 1) and (max-width: $normalizedBreakpointEnd) {
+        @content;
+      }
+    }
+  }
+}
+
+@mixin hide-incomplete-flex-row($columns, $item-selector: ".list-item") {
+  @if $columns > 1 {
+    @for $remainder from 1 through ($columns - 1) {
+      &:has(
+          > #{$item-selector}:nth-child(#{$columns}n + #{$remainder}):last-child
+        )
+        > #{$item-selector}:nth-last-child(-n + #{$remainder}) {
+        display: none;
+      }
+    }
+  }
+}
+
+@mixin hide-incomplete-flex-rows(
+  $min-item-width,
+  $gap,
+  $max-columns: 12,
+  $container-name: main-content,
+  $item-selector: ".list-item"
+) {
+  @for $columns from 2 through $max-columns {
+    $min-width: $columns * $min-item-width + ($columns - 1) * $gap;
+
+    $next-min-width: ($columns + 1) * $min-item-width + $columns * $gap;
+
+    $max-width: $next-min-width - 1px;
+
+    @if $columns == $max-columns {
+      @container #{$container-name} (min-width: #{$min-width}) {
+        @include hide-incomplete-flex-row($columns, $item-selector);
+      }
+    } @else {
+      @container #{$container-name}
+        (min-width: #{$min-width})
+        and (max-width: #{$max-width}) {
+        @include hide-incomplete-flex-row($columns, $item-selector);
+      }
+    }
+  }
+}

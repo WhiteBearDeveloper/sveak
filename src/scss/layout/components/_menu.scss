@@ -1,0 +1,68 @@
+@use "sass:color";
+@use "./../../include/variables";
+@use "./../../include/mixins";
+
+.menu {
+  @include mixins.media-breakpoint-down(lg) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    max-width: 100%;
+    z-index: 100;
+    transform: translateX(-100%);
+    @include mixins.transition(transform, max-width);
+    background-color: #d6bdff;
+    padding-top: 72px;
+
+    #burger__input:checked ~ .wrapper & {
+      transform: translateX(0);
+    }
+  }
+
+  @include mixins.media-breakpoint-up(xs) {
+    max-width: 260px;
+  }
+
+  @include mixins.media-breakpoint-up(lg) {
+    flex-shrink: 0;
+    width: 310px;
+    max-width: none;
+    border-right: variables.$desktopLayoutBorder;
+    background-color: var(--main-color);
+  }
+
+  &__list {
+    height: 100%;
+    overflow-y: scroll;
+    padding: 0px 20px 20px;
+
+    @include mixins.media-breakpoint-up(lg) {
+      padding: 40px 25px 20px 40px;
+    }
+  }
+
+  &__item {
+    overflow: hidden;
+    border-radius: 30px;
+  }
+  &__link {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    cursor: pointer;
+    padding: 10px;
+    @include mixins.transition(background-color);
+
+    &:hover {
+      background-color: color.change(#ff39eb, $alpha: 0.15);
+    }
+  }
+  &__icon {
+    flex-shrink: 0;
+    @include mixins.squareSize(31px);
+    border-radius: 50%;
+    background-color: color.change(#000, $alpha: 0.14);
+  }
+}

@@ -1,0 +1,37 @@
+@use "./layout/layout";
+@use "./include/mixins";
+
+.main {
+  position: relative;
+  flex-grow: 1;
+  @include mixins.transition(background-color);
+  padding: 26px 20px 30px;
+
+  container-type: inline-size;
+  container-name: main-content;
+
+  @include mixins.media-breakpoint-down(lg) {
+    background-color: color-mix(in srgb, var(--main-color) 50%, transparent);
+  }
+
+  @include mixins.media-breakpoint-up(lg) {
+    background-color: var(--main-color);
+  }
+}
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+
+  @include mixins.media-breakpoint-down(lg) {
+    justify-content: center;
+  }
+
+  @include mixins.hide-incomplete-flex-rows(
+    115px,
+    20px,
+    12,
+    main-content,
+    ".list-item"
+  );
+}

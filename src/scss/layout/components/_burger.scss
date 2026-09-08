@@ -1,0 +1,68 @@
+@use "./../../include/variables";
+@use "./../../include/mixins";
+
+.burger {
+  position: fixed;
+  top: variables.$headerPadding;
+  left: variables.$headerPadding;
+  width: 24px;
+  height: 21px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  cursor: pointer;
+  z-index: 200;
+
+  @include mixins.media-breakpoint-up(lg) {
+    display: none;
+  }
+
+  &__input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    opacity: 0;
+  }
+  &__item {
+    position: absolute;
+    left: 0;
+    width: 24px;
+    height: 5px;
+    border-radius: 2px;
+    background-color: black;
+    opacity: 0.15;
+    @include mixins.transition(opacity, transform, z-index, top);
+
+    &-top {
+      top: 0;
+    }
+    &-middle {
+      top: 8px;
+    }
+    &-bottom {
+      top: 16px;
+    }
+  }
+  &:hover .burger__item {
+    opacity: 0.6;
+  }
+
+  #burger__input:checked ~ & {
+    .burger__item-top,
+    .burger__item-bottom {
+      top: 8px;
+    }
+    .burger__item-top {
+      transform: rotate(45deg);
+    }
+    .burger__item-bottom {
+      transform: rotate(-45deg);
+    }
+    .burger__item-middle {
+      opacity: 0;
+      z-index: -1;
+      pointer-events: none;
+    }
+  }
+}

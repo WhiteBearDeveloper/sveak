@@ -1,0 +1,14 @@
+@use "./../include/variables";
+@use "./../include/mixins";
+
+.footer {
+  flex-shrink: 0;
+  background-color: var(--main-color);
+  @include mixins.transition(background-color);
+  padding: 15px;
+  margin-top: auto;
+
+  @include mixins.media-breakpoint-up(lg) {
+    border-top: variables.$desktopLayoutBorder;
+  }
+}

@@ -1,0 +1,13 @@
+@use "./../include/variables";
+@use "./../include/mixins";
+@use "./components/controls";
+
+.header {
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-shrink: 0;
+  background-color: var(--main-color);
+  @include mixins.transition(background-color);
+  padding: variables.$headerPadding;
+}

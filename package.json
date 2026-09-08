@@ -1,0 +1,22 @@
+{
+  "devDependencies": {
+    "browser-sync": "^3.0.4",
+    "gulp": "^5.0.1",
+    "gulp-cheerio": "^1.0.0",
+    "gulp-clean": "^0.4.0",
+    "gulp-notify": "^5.0.0",
+    "gulp-plumber": "^1.2.1",
+    "gulp-postcss": "^10.0.0",
+    "gulp-pug": "^5.0.0",
+    "gulp-replace": "^1.1.4",
+    "gulp-sass": "^6.0.1",
+    "gulp-svg-sprite": "^2.0.3",
+    "postcss-css-reset": "^1.0.2",
+    "sass": "^1.103.1"
+  },
+  "browserslist": [
+    "last 2 versions",
+    "> 0.5%",
+    "not dead"
+  ]
+}

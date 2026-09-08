@@ -1,0 +1,14 @@
+include ../../components/svg-icon.pug
+
+-
+    const controls = [
+        { name: 'play'},
+        { name: 'rec'},
+        { name: 'stop'}
+    ]
+
+div.controls    
+    each control in controls
+        input(type='radio', name="controls", id=`control-${control.name}` class="control__input")
+        label(for=`control-${control.name}`, class="controls__item")
+            +icon(control.name, 'controls__icon')

@@ -1,0 +1,35 @@
+@use "./../../include/mixins";
+
+.controls {
+  margin-left: auto;
+  display: flex;
+  gap: 15px;
+
+  &__item {
+    color: black;
+    opacity: 0.13;
+    cursor: pointer;
+    @include mixins.squareSize(21px);
+    @include mixins.transition(opacity);
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+  &__icon {
+    color: inherit;
+    @include mixins.squareSize(inherit);
+  }
+
+  .control__input {
+    &:checked + .controls__item {
+      opacity: 1;
+    }
+  }
+  #control-play:checked + .controls__item {
+    color: green;
+  }
+  #control-rec:checked + .controls__item {
+    color: red;
+  }
+}

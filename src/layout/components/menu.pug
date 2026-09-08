@@ -1,0 +1,17 @@
+- 
+    const menuItems = [
+        { text: 'Lorem ipsum dolor'},
+        { text: 'Lorem'},
+        { text: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Velit dolorum quidem deleniti nostrum cumque, voluptatibus ut nihil aut harum nesciunt? Amet modi temporibus nisi harum. Consectetur, distinctio! Enim, iure veniam.'},
+        { text: 'Lorem ipsum dolor'},
+        { text: 'Lorem'},
+        { text: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Velit dolorum quidem deleniti nostrum cumque, voluptatibus ut nihil aut harum nesciunt? Amet modi temporibus nisi harum. Consectetur, distinctio! Enim, iure veniam.'}
+    ]
+
+nav.menu
+    ul.menu__list
+        each item in menuItems
+            li.menu__item
+                a.menu__link
+                    span.menu__icon
+                    span.menu__text= item.text

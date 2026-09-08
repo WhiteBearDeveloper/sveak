@@ -1,0 +1,14 @@
+$transition-main: 0.3s cubic-bezier(0.16, 0.16, 0.4, 0.82);
+
+$headerPadding: 20px;
+
+$desktopLayoutBorder: 2px solid rgba(black, 0.14);
+
+//media
+$media-lg: 1024px;
+$media-xs: 640px;
+
+$media-sizes: (
+  "lg": $media-lg,
+  "xs": $media-xs,
+);
